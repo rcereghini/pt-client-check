@@ -1,6 +1,7 @@
 import React from "react";
 import { Calendar, momentLocalizer } from "react-big-calendar";
 import moment from "moment";
+import "./userCalendar.css";
 import "./calendarLib.css";
 import { findByLabelText } from "@testing-library/react";
 
@@ -22,14 +23,7 @@ const UserCalendar = props => {
   //   });
 
   return (
-    <div
-      style={{
-        fontSize: ".5em",
-        marginTop: "2em",
-        maxWidth: "1000px",
-        margin: "0 auto"
-      }}
-    >
+    <div className="user-calendar-main">
       <Calendar
         localizer={localizer}
         events={events}
