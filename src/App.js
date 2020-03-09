@@ -2,6 +2,7 @@ import React from "react";
 import UserCalendar from "./components/UserCalendar/UserCalendar";
 import "./App.css";
 import ClientList from "./components/ClientList/ClientList";
+import BottomNav from "./components/BottomNav/BottomNav";
 
 function App() {
   let clients = [
@@ -42,6 +43,7 @@ function App() {
       <h1>Personal Training Assistant</h1>
       <UserCalendar />
       <ClientList clients={clients} />
+      <BottomNav></BottomNav>
     </div>
   );
 }
