@@ -13,22 +13,24 @@ function App() {
   return (
     <div className="App">
       <h1>Personal Training Assistant</h1>
-      {currentScreen === 0 ? <ClientList clients={clients} /> : null}
-      {currentScreen === 1 ? (
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-            flexDirection: "column"
-          }}
-        >
-          <UserCalendar />
-          <span style={{ marginTop: "2em" }}></span>
-          <ClientChips clients={clients}></ClientChips>
-        </div>
-      ) : null}
-      <span style={{ marginTop: "2em" }}></span>
+      <div className="navigation-container">
+        {currentScreen === 0 ? <ClientList clients={clients} /> : null}
+        {currentScreen === 1 ? (
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              flexDirection: "column"
+            }}
+          >
+            <UserCalendar />
+            <span style={{ marginTop: "2em" }}></span>
+            <ClientChips clients={clients}></ClientChips>
+          </div>
+        ) : null}
+        <span style={{ marginTop: "2em" }}></span>
+      </div>
       <BottomNav
         navChangeCallback={i => {
           setCurrentScreen(i);
