@@ -3,6 +3,8 @@ import UserCalendar from "./components/UserCalendar/UserCalendar";
 import "./App.css";
 import ClientList from "./components/ClientList/ClientList";
 import BottomNav from "./components/BottomNav/BottomNav";
+import ClientChips from "./components/ClientChips/ClientChips";
+import { deepOrange, deepPurple } from "@material-ui/core/colors";
 
 function App() {
   let clients = [
@@ -42,7 +44,10 @@ function App() {
     <div className="App">
       <h1>Personal Training Assistant</h1>
       <UserCalendar />
+      <span style={{ marginTop: "2em" }}></span>
       <ClientList clients={clients} />
+      <ClientChips clients={clients}></ClientChips>
+      <span style={{ marginTop: "2em" }}></span>
       <BottomNav></BottomNav>
     </div>
   );

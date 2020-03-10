@@ -1,0 +1,7 @@
+.client-chip-list {
+  display: flex;
+  margin: 1em;
+}
+.client-chip-container {
+  margin: 0.3em;
+}
