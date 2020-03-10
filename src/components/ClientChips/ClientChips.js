@@ -9,15 +9,21 @@ const ClientChips = props => {
     return splitName[0][0].toUpperCase() + splitName[1][0].toUpperCase();
   };
 
-  getNameAbbreviation("Test Run");
+  const handleChipClick = chipNum => {
+    console.info("You clicked the Chip.", chipNum);
+    console.log("document =>", document.querySelector("#clientChip" + chipNum));
+  };
 
   return (
     <div className="client-chip-list">
-      {props.clients.map(client => (
-        <div className="client-chip-container">
+      {props.clients.map((client, i) => (
+        <div id="clientChipContainer" className="client-chip-container" key={i}>
           <Chip
+            id={"clientChip" + i}
             label={client.name}
+            clickable={true}
             avatar={<Avatar>{getNameAbbreviation(client.name)}</Avatar>}
+            onClick={() => handleChipClick(i)}
           />
         </div>
       ))}
