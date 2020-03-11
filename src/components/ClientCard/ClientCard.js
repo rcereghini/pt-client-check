@@ -2,6 +2,8 @@ import React from "react";
 import "./clientCard.css";
 import { makeStyles } from "@material-ui/core/styles";
 import Paper from "@material-ui/core/Paper";
+import ClientListModal from "../ClientListModal/ClientListModal";
+import user from "../../models/user";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -26,6 +28,7 @@ const ClientCard = props => {
         padding: ".5em",
         margin: ".5em"
       }}
+      className="client-card-main"
     >
       <p>{props.client.name}</p>
       <p>
@@ -34,6 +37,7 @@ const ClientCard = props => {
       <p>
         <a href={`mail:${props.client.email}`}>{props.client.email}</a>
       </p>
+      <ClientListModal></ClientListModal>
     </Paper>
   );
 };

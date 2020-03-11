@@ -3,4 +3,9 @@
   border-radius: 5px;
   box-shadow: 1px 1px 1px 0px rgba(0, 0, 0, 0.3);
   margin: 0.3em;
+  cursor: pointer;
+}
+
+.client-card-main:hover {
+  background-color: #eee;
 }
