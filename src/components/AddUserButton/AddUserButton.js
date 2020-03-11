@@ -59,12 +59,14 @@ const AddUserButton = () => {
   };
 
   return (
-    <Paper className="add-icon-container" onClick={handleOpen}>
-      <PersonAddIcon
-        className="add-icon"
-        fontSize="large"
-        color="disabled"
-      ></PersonAddIcon>
+    <div>
+      <Paper className="add-icon-container" onClick={handleOpen}>
+        <PersonAddIcon
+          className="add-icon"
+          fontSize="large"
+          color="disabled"
+        ></PersonAddIcon>
+      </Paper>
       <Modal
         aria-labelledby="simple-modal-title"
         aria-describedby="simple-modal-description"
@@ -75,7 +77,7 @@ const AddUserButton = () => {
           <AddUserForm></AddUserForm>
         </div>
       </Modal>
-    </Paper>
+    </div>
   );
 };
 

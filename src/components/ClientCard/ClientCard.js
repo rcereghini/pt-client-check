@@ -57,24 +57,26 @@ const ClientCard = props => {
   };
 
   return (
-    <Paper
-      elevation={3}
-      style={{
-        minWidth: "200px",
-        maxWidth: "350px",
-        padding: ".5em",
-        margin: ".5em"
-      }}
-      className="client-card-main"
-      onClick={handleOpen}
-    >
-      <p>{props.client.name}</p>
-      <p>
-        <a href={`tel:${props.client.phone}`}>{props.client.phone}</a>
-      </p>
-      <p>
-        <a href={`mail:${props.client.email}`}>{props.client.email}</a>
-      </p>
+    <div>
+      <Paper
+        elevation={3}
+        style={{
+          minWidth: "200px",
+          maxWidth: "350px",
+          padding: ".5em",
+          margin: ".5em"
+        }}
+        className="client-card-main"
+        onClick={handleOpen}
+      >
+        <p>{props.client.name}</p>
+        <p>
+          <a href={`tel:${props.client.phone}`}>{props.client.phone}</a>
+        </p>
+        <p>
+          <a href={`mail:${props.client.email}`}>{props.client.email}</a>
+        </p>
+      </Paper>
       <Modal
         aria-labelledby="simple-modal-title"
         aria-describedby="simple-modal-description"
@@ -88,7 +90,7 @@ const ClientCard = props => {
           </p>
         </div>
       </Modal>
-    </Paper>
+    </div>
   );
 };
 
