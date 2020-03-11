@@ -2,7 +2,14 @@ import React from "react";
 import "./clientListModal.css";
 
 const ClientListModal = () => {
-  return <div>ClientListModal</div>;
+  return (
+    <div>
+      <h2 id="simple-modal-title">Text in a modal</h2>
+      <p id="simple-modal-description">
+        Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
+      </p>
+    </div>
+  );
 };
 
 export default ClientListModal;
