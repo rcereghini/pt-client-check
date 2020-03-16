@@ -31,8 +31,10 @@ const UserCalendar = props => {
           events={events}
           startAccessor="start"
           endAccessor="end"
+          selectable="true"
           style={{ height: 500 }}
           views={["month"]}
+          onSelectSlot={e => console.log("selectSlot =>", e)}
           onDrillDown={e => console.log("onDrillDown", e)}
           onSelectEvent={e => console.log("onSelectEvent", e)}
         />

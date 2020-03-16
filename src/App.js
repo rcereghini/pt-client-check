@@ -6,6 +6,7 @@ import BottomNav from "./components/BottomNav/BottomNav";
 import ClientChips from "./components/ClientChips/ClientChips";
 import { deepOrange, deepPurple } from "@material-ui/core/colors";
 import clients from "./assets/clientList";
+import AddSessionForm from "./components/AddSessionForm/AddSessionForm";
 
 function App() {
   const [currentScreen, setCurrentScreen] = useState(1);
@@ -37,6 +38,7 @@ function App() {
           console.log("hi", i);
         }}
       ></BottomNav>
+      <AddSessionForm></AddSessionForm>
     </div>
   );
 }

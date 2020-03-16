@@ -1,0 +1,10 @@
+.add-session-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.add-session-form > label {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  margin: 0.5em;
+}
