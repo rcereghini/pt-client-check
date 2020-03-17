@@ -1,16 +1,56 @@
 import React, { useState } from "react";
 import UserCalendar from "./components/UserCalendar/UserCalendar";
 import "./App.css";
+import Button from "@material-ui/core/Button";
+
 import ClientList from "./components/ClientList/ClientList";
 import BottomNav from "./components/BottomNav/BottomNav";
 import ClientChips from "./components/ClientChips/ClientChips";
+import { makeStyles } from "@material-ui/core/styles";
+import AlarmAddIcon from "@material-ui/icons/AddCircle";
+import Icon from "@material-ui/core/Icon";
 import { deepOrange, deepPurple } from "@material-ui/core/colors";
 import clients from "./assets/clientList";
 import AddSessionForm from "./components/AddSessionForm/AddSessionForm";
+import Modal from "@material-ui/core/Modal";
 
 function App() {
   const [currentScreen, setCurrentScreen] = useState(1);
 
+  const useStyles = makeStyles(theme => ({
+    button: {
+      margin: theme.spacing(1)
+    },
+    paper: {
+      position: "absolute",
+      width: 400,
+      backgroundColor: theme.palette.background.paper,
+      border: "2px solid #000",
+      boxShadow: theme.shadows[5],
+      padding: theme.spacing(2, 4, 3)
+    },
+    root: {
+      display: "flex",
+      flexWrap: "wrap",
+      "& > *": {
+        margin: theme.spacing(1),
+        width: theme.spacing(16),
+        height: theme.spacing(16)
+      }
+    }
+  }));
+
+  const classes = useStyles();
+
+  const [open, setOpen] = React.useState(false);
+
+  const handleOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
   return (
     <div className="App">
       <h1>Personal Training Assistant</h1>
@@ -25,20 +65,46 @@ function App() {
               flexDirection: "column"
             }}
           >
+            <Button
+              variant="contained"
+              color="primary"
+              className={classes.button}
+              startIcon={<AlarmAddIcon />}
+              style={{ alignSelf: "flex-end" }}
+              onClick={handleOpen}
+            >
+              Add Event
+            </Button>
             <UserCalendar />
             <span style={{ marginTop: "2em" }}></span>
             <ClientChips clients={clients}></ClientChips>
+            <Modal
+              aria-labelledby="simple-modal-title"
+              aria-describedby="simple-modal-description"
+              open={open}
+              onClose={handleClose}
+              style={{
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center"
+              }}
+            >
+              <div style={{}} className={classes.paper}>
+                <AddSessionForm></AddSessionForm>
+              </div>
+            </Modal>
           </div>
         ) : null}
         <span style={{ marginTop: "2em" }}></span>
       </div>
+      <span style={{ marginTop: "3em" }}></span>
       <BottomNav
         navChangeCallback={i => {
           setCurrentScreen(i);
           console.log("hi", i);
         }}
       ></BottomNav>
-      <AddSessionForm></AddSessionForm>
+      {/* <AddSessionForm></AddSessionForm> */}
     </div>
   );
 }

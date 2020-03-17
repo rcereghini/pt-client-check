@@ -1,6 +1,7 @@
 .add-session-form {
   display: flex;
   flex-direction: column;
+  margin: 1.5em;
 }
 
 .add-session-form > label {
