@@ -20,9 +20,17 @@ const UserCalendar = props => {
           events={eventList}
           style={{ height: 500 }}
           views={["month"]}
-          onSelectSlot={e => console.log("selectSlot =>", e)}
-          onDrillDown={e => console.log("onDrillDown", e)}
-          onSelectEvent={e => console.log("onSelectEvent", e)}
+          onSelectSlot={e => {
+            console.log("selectSlot =>", e);
+            alert("MODAL WITH DAYS EVENT LIST");
+          }}
+          onDrillDown={e => {
+            console.log("onDrillDown", e);
+          }}
+          onSelectEvent={e => {
+            console.log("onSelectEvent", e);
+            alert("MODAL WITH EVENT DETAILS");
+          }}
         />
       </Paper>
     </div>

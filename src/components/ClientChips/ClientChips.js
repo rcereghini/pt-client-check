@@ -10,6 +10,7 @@ const ClientChips = props => {
   };
 
   const handleChipClick = chipNum => {
+    alert("Filters Calendar Events");
     console.info("You clicked the Chip.", chipNum);
     console.log("document =>", document.querySelector("#clientChip" + chipNum));
   };
