@@ -8,6 +8,8 @@ import {
 } from "@material-ui/pickers";
 import Button from "@material-ui/core/Button";
 import MomentUtils from "@date-io/moment";
+import { makeStyles } from "@material-ui/core/styles";
+
 import Grid from "@material-ui/core/Grid";
 import Paper from "@material-ui/core/Paper";
 import TextField from "@material-ui/core/TextField";
@@ -19,6 +21,27 @@ const AddSessionForm = () => {
   const [selectedTime, setSelectedTime] = useState("");
   const [selectedUser, setSelectedUser] = useState("");
   const [eventDescription, setEventDescription] = useState("");
+
+  const useStyles = makeStyles(theme => ({
+    button: {
+      margin: theme.spacing(1)
+    },
+    paper: {
+      position: "absolute",
+      padding: theme.spacing(2, 4, 3)
+    },
+    root: {
+      display: "flex",
+      flexWrap: "wrap",
+      "& > *": {
+        margin: theme.spacing(1),
+        width: theme.spacing(16),
+        height: theme.spacing(16)
+      }
+    }
+  }));
+
+  const classes = useStyles();
 
   const handleSubmit = event => {
     event.preventDefault();
@@ -91,6 +114,15 @@ const AddSessionForm = () => {
             multiline
             defaultValue=""
           />{" "}
+          <Button
+            variant="contained"
+            color="primary"
+            className={classes.button}
+            style={{ alignSelf: "flex-end", margin: "0em", marginTop: "2em" }}
+            type="submit"
+          >
+            Submit
+          </Button>
         </form>
         <p>{user}</p>
       </div>

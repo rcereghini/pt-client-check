@@ -23,10 +23,6 @@ function App() {
     },
     paper: {
       position: "absolute",
-      width: 400,
-      backgroundColor: theme.palette.background.paper,
-      border: "2px solid #000",
-      boxShadow: theme.shadows[5],
       padding: theme.spacing(2, 4, 3)
     },
     root: {
@@ -70,7 +66,7 @@ function App() {
               color="primary"
               className={classes.button}
               startIcon={<AlarmAddIcon />}
-              style={{ alignSelf: "flex-end" }}
+              style={{ alignSelf: "flex-end", marginBottom: "1.5em" }}
               onClick={handleOpen}
             >
               Add Event
@@ -82,6 +78,7 @@ function App() {
               aria-labelledby="simple-modal-title"
               aria-describedby="simple-modal-description"
               open={open}
+              disableAutoFocus={true}
               onClose={handleClose}
               style={{
                 display: "flex",
@@ -89,7 +86,7 @@ function App() {
                 alignItems: "center"
               }}
             >
-              <div style={{}} className={classes.paper}>
+              <div style={{}}>
                 <AddSessionForm></AddSessionForm>
               </div>
             </Modal>
