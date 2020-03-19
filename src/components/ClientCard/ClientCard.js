@@ -5,8 +5,10 @@ import Paper from "@material-ui/core/Paper";
 import ClientListModal from "../ClientListModal/ClientListModal";
 import user from "../../models/user";
 import avatar1 from "../../assets/images/avatar1.jpeg";
+import Button from "@material-ui/core/Button";
 
 import Modal from "@material-ui/core/Modal";
+import { Grid } from "@material-ui/core";
 
 function rand() {
   return Math.round(Math.random() * 20) - 10;
@@ -79,17 +81,32 @@ const ClientCard = props => {
         }}
       >
         <Paper>
-          <div style={{ padding: "3em" }}>
-            <img className="avatar" src={props.avatar}></img>
+          <div style={{ display: "grid", gridTemplateColumns: "1fr 2fr" }}>
+            <div style={{ padding: "3em" }}>
+              <img className="avatar" src={props.avatar}></img>
 
-            <p>{props.client.name}</p>
-            <p>
-              <a href={`tel:${props.client.phone}`}>{props.client.phone}</a>
-            </p>
-            <p>
-              <a href={`mail:${props.client.email}`}>{props.client.email}</a>
-            </p>
-            <p>MORE INFO GOES HERE</p>
+              <p>{props.client.name}</p>
+              <p>
+                <a href={`tel:${props.client.phone}`}>{props.client.phone}</a>
+              </p>
+              <p>
+                <a href={`mail:${props.client.email}`}>{props.client.email}</a>
+              </p>
+              <p>MORE INFO GOES HERE</p>
+            </div>
+            <div style={{ display: "grid", gridTemplateRows: "1fr 40px" }}>
+              <div style={{ border: "1px solid #ddd" }}></div>
+              <div
+                style={{
+                  width: "100%",
+                  display: "grid",
+                  gridTemplateColumns: "1fr 100px"
+                }}
+              >
+                <input type="text"></input>
+                <Button>Send</Button>
+              </div>
+            </div>
           </div>
         </Paper>
       </Modal>
