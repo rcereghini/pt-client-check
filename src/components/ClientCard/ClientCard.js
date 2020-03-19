@@ -82,7 +82,14 @@ const ClientCard = props => {
       >
         <Paper>
           <div style={{ display: "grid", gridTemplateColumns: "1fr 2fr" }}>
-            <div style={{ padding: "3em" }}>
+            <div
+              style={{
+                padding: "3em",
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center"
+              }}
+            >
               <img className="avatar" src={props.avatar}></img>
 
               <p>{props.client.name}</p>
