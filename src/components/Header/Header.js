@@ -5,8 +5,9 @@ import MenuItem from "@material-ui/core/MenuItem";
 import MenuIcon from "@material-ui/icons/Menu";
 import Icon from "@material-ui/core/Icon";
 
-const Header = () => {
+const Header = props => {
   const [anchorEl, setAnchorEl] = React.useState(null);
+  const [value, setValue] = React.useState(4);
 
   const handleClick = event => {
     setAnchorEl(event.currentTarget);
@@ -14,6 +15,11 @@ const Header = () => {
 
   const handleClose = () => {
     setAnchorEl(null);
+  };
+
+  const navigateHandler = navNum => {
+    props.navChangeCallback(navNum);
+    handleClose();
   };
 
   return (
@@ -32,9 +38,9 @@ const Header = () => {
         open={Boolean(anchorEl)}
         onClose={handleClose}
       >
-        <MenuItem onClick={handleClose}>Profile</MenuItem>
-        <MenuItem onClick={handleClose}>Settings</MenuItem>
-        <MenuItem onClick={handleClose}>Logout</MenuItem>
+        <MenuItem onClick={() => navigateHandler(4)}>Profile</MenuItem>
+        <MenuItem onClick={() => navigateHandler(5)}>Settings</MenuItem>
+        <MenuItem>Logout</MenuItem>
       </Menu>
     </div>
   );

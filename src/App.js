@@ -4,6 +4,8 @@ import "./App.css";
 import Button from "@material-ui/core/Button";
 
 import ClientList from "./components/ClientList/ClientList";
+import Profile from "./components/Profile/Profile";
+import Settings from "./components/Settings/Settings";
 import BottomNav from "./components/BottomNav/BottomNav";
 import ClientChips from "./components/ClientChips/ClientChips";
 import { makeStyles } from "@material-ui/core/styles";
@@ -68,7 +70,12 @@ function App() {
         >
           Add Event
         </Button>
-        <Header></Header>
+        <Header
+          navChangeCallback={i => {
+            setCurrentScreen(i);
+            console.log("hi", i);
+          }}
+        ></Header>
       </div>
       <div className="navigation-container">
         {currentScreen === 0 ? <ClientList clients={clients} /> : null}
@@ -86,11 +93,15 @@ function App() {
             <ClientChips clients={clients}></ClientChips>
           </div>
         ) : null}
+        {currentScreen === 3 ? <p>Messages or Achievemnts</p> : null}
+        {currentScreen === 4 ? <Profile></Profile> : null}
+        {currentScreen === 5 ? <Settings></Settings> : null}
         <span style={{ marginTop: "2em" }}></span>
       </div>
       <span style={{ marginTop: "3em" }}></span>
       <BottomNav
         navChangeCallback={i => {
+          console.log("setting current screen", i);
           setCurrentScreen(i);
           console.log("hi", i);
         }}
