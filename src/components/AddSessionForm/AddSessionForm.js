@@ -9,6 +9,7 @@ import {
 import Button from "@material-ui/core/Button";
 import MomentUtils from "@date-io/moment";
 import { makeStyles } from "@material-ui/core/styles";
+import clientList from "../../assets/clientList";
 
 import Grid from "@material-ui/core/Grid";
 import Paper from "@material-ui/core/Paper";
@@ -69,8 +70,8 @@ const AddSessionForm = () => {
         <form onSubmit={e => handleSubmit(e)} className="add-session-form">
           <Autocomplete
             id="combo-box-demo"
-            options={[1, 2, 3]}
-            getOptionLabel={option => option}
+            options={clientList}
+            getOptionLabel={client => client.name}
             style={{ width: 300 }}
             renderInput={params => (
               <TextField {...params} label="Select Friend" variant="outlined" />
