@@ -9,3 +9,12 @@
 .client-card-main:hover {
   background-color: #eee;
 }
+
+.avatar {
+  height: 120px;
+  width: 120px;
+  border-radius: 50%;
+  margin: 1em;
+  /* position: relative; */
+  /* top: -75px; */
+}

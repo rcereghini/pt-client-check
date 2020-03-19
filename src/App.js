@@ -13,6 +13,7 @@ import { deepOrange, deepPurple } from "@material-ui/core/colors";
 import clients from "./assets/clientList";
 import AddSessionForm from "./components/AddSessionForm/AddSessionForm";
 import Modal from "@material-ui/core/Modal";
+import Header from "./components/Header/Header";
 
 function App() {
   const [currentScreen, setCurrentScreen] = useState(1);
@@ -49,7 +50,26 @@ function App() {
   };
   return (
     <div className="App">
-      <h1>Personal Training Assistant</h1>
+      <div
+        style={{
+          width: "1000px",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "space-between"
+        }}
+      >
+        <Button
+          variant="contained"
+          color="primary"
+          className={classes.button}
+          startIcon={<AlarmAddIcon />}
+          style={{ alignSelf: "flex-end", marginBottom: "1.5em" }}
+          onClick={handleOpen}
+        >
+          Add Event
+        </Button>
+        <Header></Header>
+      </div>
       <div className="navigation-container">
         {currentScreen === 0 ? <ClientList clients={clients} /> : null}
         {currentScreen === 1 ? (
@@ -61,35 +81,9 @@ function App() {
               flexDirection: "column"
             }}
           >
-            <Button
-              variant="contained"
-              color="primary"
-              className={classes.button}
-              startIcon={<AlarmAddIcon />}
-              style={{ alignSelf: "flex-end", marginBottom: "1.5em" }}
-              onClick={handleOpen}
-            >
-              Add Event
-            </Button>
             <UserCalendar />
             <span style={{ marginTop: "2em" }}></span>
             <ClientChips clients={clients}></ClientChips>
-            <Modal
-              aria-labelledby="simple-modal-title"
-              aria-describedby="simple-modal-description"
-              open={open}
-              disableAutoFocus={true}
-              onClose={handleClose}
-              style={{
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center"
-              }}
-            >
-              <div style={{}}>
-                <AddSessionForm></AddSessionForm>
-              </div>
-            </Modal>
           </div>
         ) : null}
         <span style={{ marginTop: "2em" }}></span>
@@ -102,6 +96,22 @@ function App() {
         }}
       ></BottomNav>
       {/* <AddSessionForm></AddSessionForm> */}
+      <Modal
+        aria-labelledby="simple-modal-title"
+        aria-describedby="simple-modal-description"
+        open={open}
+        disableAutoFocus={true}
+        onClose={handleClose}
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center"
+        }}
+      >
+        <div style={{}}>
+          <AddSessionForm></AddSessionForm>
+        </div>
+      </Modal>
     </div>
   );
 }

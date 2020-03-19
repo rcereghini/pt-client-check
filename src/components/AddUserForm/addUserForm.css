@@ -1,0 +1,20 @@
+.add-user-form {
+  display: flex;
+  flex-direction: column;
+  margin: 1.5em;
+  padding: 1.5em 1em;
+}
+
+.add-user-form > label {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  margin: 0.5em;
+}
+
+.MuiPaper-root > div {
+  outline: none;
+}
+
+div[aria-labelledby] > div[tabindex="-1"] {
+  outline: none;
+}

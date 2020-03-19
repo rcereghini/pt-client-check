@@ -40,9 +40,7 @@ const AddUserButton = () => {
           alignItems: "center"
         }}
       >
-        <Paper>
-          <div style={{ padding: "3em" }}>Add Friend Form</div>
-        </Paper>
+        <AddUserForm></AddUserForm>
       </Modal>
     </div>
   );

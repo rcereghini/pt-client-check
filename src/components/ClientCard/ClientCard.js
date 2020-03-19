@@ -4,6 +4,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import Paper from "@material-ui/core/Paper";
 import ClientListModal from "../ClientListModal/ClientListModal";
 import user from "../../models/user";
+import avatar1 from "../../assets/images/avatar1.jpeg";
 
 import Modal from "@material-ui/core/Modal";
 
@@ -57,6 +58,7 @@ const ClientCard = props => {
         className="client-card-main"
         onClick={handleOpen}
       >
+        <img className="avatar" src={props.avatar}></img>
         <p>{props.client.name}</p>
         <p>
           <a href={`tel:${props.client.phone}`}>{props.client.phone}</a>
@@ -77,7 +79,18 @@ const ClientCard = props => {
         }}
       >
         <Paper>
-          <div style={{ padding: "3em" }}>Friend Info</div>
+          <div style={{ padding: "3em" }}>
+            <img src={props.avatar}></img>
+
+            <p>{props.client.name}</p>
+            <p>
+              <a href={`tel:${props.client.phone}`}>{props.client.phone}</a>
+            </p>
+            <p>
+              <a href={`mail:${props.client.email}`}>{props.client.email}</a>
+            </p>
+            <p>MORE INFO GOES HERE</p>
+          </div>
         </Paper>
       </Modal>
     </div>
