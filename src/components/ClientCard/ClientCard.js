@@ -80,7 +80,7 @@ const ClientCard = props => {
       >
         <Paper>
           <div style={{ padding: "3em" }}>
-            <img src={props.avatar}></img>
+            <img className="avatar" src={props.avatar}></img>
 
             <p>{props.client.name}</p>
             <p>
