@@ -72,7 +72,7 @@ const AddSessionForm = () => {
             id="combo-box-demo"
             options={clientList}
             getOptionLabel={client => client.name}
-            style={{ width: 300 }}
+            style={{ width: "100%" }}
             renderInput={params => (
               <TextField {...params} label="Select Friend" variant="outlined" />
             )}
