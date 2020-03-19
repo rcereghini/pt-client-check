@@ -103,7 +103,14 @@ const ClientCard = props => {
                   gridTemplateColumns: "1fr 100px"
                 }}
               >
-                <input type="text"></input>
+                <input
+                  style={{
+                    border: "1px solid #ddd",
+                    borderTop: "0px",
+                    borderBottom: "0px"
+                  }}
+                  type="text"
+                ></input>
                 <Button>Send</Button>
               </div>
             </div>
