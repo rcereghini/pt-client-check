@@ -6,7 +6,7 @@ const clients = [
     homeGym: "LA Fitness"
   },
   {
-    name: "Rupert Morgan",
+    name: "Lisa Morgan",
     phone: "480-555-2233",
     email: "rmorgan@gmail.com",
     homeGym: "The Village"
@@ -24,7 +24,7 @@ const clients = [
     homeGym: "Gold's Gym"
   },
   {
-    name: "Raul Alonzo",
+    name: "Sarah Smith",
     phone: "480-111-2222",
     email: "ralonzo@gmail.com",
     homeGym: "AZ Combat Sports"

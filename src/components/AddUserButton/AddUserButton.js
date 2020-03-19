@@ -33,6 +33,7 @@ const AddUserButton = () => {
         aria-labelledby="simple-modal-title"
         aria-describedby="simple-modal-description"
         open={open}
+        elevation={3}
         onClose={handleClose}
         style={{
           display: "flex",
