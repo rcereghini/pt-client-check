@@ -68,12 +68,26 @@ const ClientCard = props => {
       >
         <img className="avatar" src={props.avatar}></img>
         <p>{props.client.name}</p>
-        <p>
+        {/* <p>
           <a href={`tel:${props.client.phone}`}>{props.client.phone}</a>
         </p>
         <p>
           <a href={`mail:${props.client.email}`}>{props.client.email}</a>
-        </p>
+        </p> */}
+        <div
+          style={{
+            display: "flex",
+            width: "80%",
+            justifyContent: "space-evenly"
+          }}
+        >
+          <IconButton aria-label="delete">
+            <PhoneIcon />
+          </IconButton>
+          <IconButton aria-label="delete">
+            <MailIcon />
+          </IconButton>
+        </div>
       </Paper>
       <Modal
         aria-labelledby="simple-modal-title"
