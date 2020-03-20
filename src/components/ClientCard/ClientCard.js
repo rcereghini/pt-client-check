@@ -6,6 +6,7 @@ import ClientListModal from "../ClientListModal/ClientListModal";
 import user from "../../models/user";
 import avatar1 from "../../assets/images/avatar1.jpeg";
 import Button from "@material-ui/core/Button";
+import Messenger from "../../components/Messenger/Messenger";
 
 import Modal from "@material-ui/core/Modal";
 import { Grid } from "@material-ui/core";
@@ -100,27 +101,16 @@ const ClientCard = props => {
                 <a href={`mail:${props.client.email}`}>{props.client.email}</a>
               </p>
               <p>MORE INFO GOES HERE</p>
-            </div>
-            <div style={{ display: "grid", gridTemplateRows: "1fr 40px" }}>
-              <div style={{ border: "1px solid #ddd" }}></div>
-              <div
-                style={{
-                  width: "100%",
-                  display: "grid",
-                  gridTemplateColumns: "1fr 100px"
-                }}
-              >
-                <input
-                  style={{
-                    border: "1px solid #ddd",
-                    borderTop: "0px",
-                    borderBottom: "0px"
-                  }}
-                  type="text"
-                ></input>
-                <Button>Send</Button>
+              <div style={{ display: "flex" }}>
+                <label>
+                  Share Email <input type="checkbox"></input>
+                </label>
+                <label>
+                  Share Phone <input type="checkbox"></input>
+                </label>
               </div>
             </div>
+            <Messenger></Messenger>
           </div>
         </Paper>
       </Modal>

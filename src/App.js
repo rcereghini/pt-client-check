@@ -18,7 +18,7 @@ import Modal from "@material-ui/core/Modal";
 import Header from "./components/Header/Header";
 
 function App() {
-  const [currentScreen, setCurrentScreen] = useState(1);
+  const [currentScreen, setCurrentScreen] = useState(0);
 
   const useStyles = makeStyles(theme => ({
     button: {
@@ -77,9 +77,11 @@ function App() {
           }}
         ></Header>
       </div>
+      <hr></hr>
+
       <div className="navigation-container">
-        {currentScreen === 0 ? <ClientList clients={clients} /> : null}
-        {currentScreen === 1 ? (
+        {currentScreen === 2 ? <ClientList clients={clients} /> : null}
+        {currentScreen === 0 ? (
           <div
             style={{
               display: "flex",
@@ -93,7 +95,7 @@ function App() {
             <ClientChips clients={clients}></ClientChips>
           </div>
         ) : null}
-        {currentScreen === 3 ? <p>Messages or Achievemnts</p> : null}
+        {currentScreen === 1 ? <p>Messages or Achievemnts</p> : null}
         {currentScreen === 4 ? <Profile></Profile> : null}
         {currentScreen === 5 ? <Settings></Settings> : null}
         <span style={{ marginTop: "2em" }}></span>

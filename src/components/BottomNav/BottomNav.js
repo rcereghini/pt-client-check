@@ -5,6 +5,7 @@ import BottomNavigationAction from "@material-ui/core/BottomNavigationAction";
 import PermContactCalendarIcon from "@material-ui/icons/PermContactCalendar";
 import ScheduleIcon from "@material-ui/icons/Schedule";
 import EmailIcon from "@material-ui/icons/Email";
+import PlayCircleOutlineIcon from "@material-ui/icons/PlayCircleOutline";
 
 const useStyles = makeStyles({
   root: {
@@ -14,7 +15,7 @@ const useStyles = makeStyles({
 
 export default function SimpleBottomNavigation(props) {
   const classes = useStyles();
-  const [value, setValue] = React.useState(1);
+  const [value, setValue] = React.useState(0);
 
   return (
     <BottomNavigation
@@ -27,12 +28,12 @@ export default function SimpleBottomNavigation(props) {
       className={classes.root}
     >
       {/* <BottomNavigationAction label="Recents" /> */}
+      <BottomNavigationAction label="Chart" icon={<ScheduleIcon />} />
+      <BottomNavigationAction label="Nudges" icon={<PlayCircleOutlineIcon />} />
       <BottomNavigationAction
-        label="Clients"
+        label="Buddies"
         icon={<PermContactCalendarIcon />}
       />
-      <BottomNavigationAction label="Schedule" icon={<ScheduleIcon />} />
-      <BottomNavigationAction label="Messages" icon={<EmailIcon />} />
     </BottomNavigation>
   );
 }
