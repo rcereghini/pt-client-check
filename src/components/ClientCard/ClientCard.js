@@ -7,6 +7,11 @@ import user from "../../models/user";
 import avatar1 from "../../assets/images/avatar1.jpeg";
 import Button from "@material-ui/core/Button";
 import Messenger from "../../components/Messenger/Messenger";
+import FormControlLabel from "@material-ui/core/FormControlLabel";
+import Switch from "@material-ui/core/Switch";
+import IconButton from "@material-ui/core/IconButton";
+import PhoneIcon from "@material-ui/icons/Phone";
+import MailIcon from "@material-ui/icons/Mail";
 
 import Modal from "@material-ui/core/Modal";
 import { Grid } from "@material-ui/core";
@@ -78,14 +83,15 @@ const ClientCard = props => {
         style={{
           display: "flex",
           justifyContent: "center",
-          alignItems: "center"
+          alignItems: "center",
+          margin: "1em"
         }}
       >
         <Paper>
           <div style={{ display: "grid", gridTemplateColumns: "1fr 2fr" }}>
             <div
               style={{
-                padding: "3em",
+                padding: "2em",
                 display: "flex",
                 flexDirection: "column",
                 alignItems: "center"
@@ -94,20 +100,32 @@ const ClientCard = props => {
               <img className="avatar" src={props.avatar}></img>
 
               <p>{props.client.name}</p>
-              <p>
+              {/* <p>
                 <a href={`tel:${props.client.phone}`}>{props.client.phone}</a>
-              </p>
-              <p>
+                </p>
+                <p>
                 <a href={`mail:${props.client.email}`}>{props.client.email}</a>
+              </p> */}
+              <div
+                style={{
+                  display: "flex",
+                  width: "80%",
+                  justifyContent: "space-evenly"
+                }}
+              >
+                <IconButton aria-label="delete">
+                  <PhoneIcon />
+                </IconButton>
+                <IconButton aria-label="delete">
+                  <MailIcon />
+                </IconButton>
+              </div>
+              <p style={{ textAlign: "center", margin: "2em 1em" }}>
+                <em>"{props.client.quote}"</em>
               </p>
-              <p>MORE INFO GOES HERE</p>
-              <div style={{ display: "flex" }}>
-                <label>
-                  Share Email <input type="checkbox"></input>
-                </label>
-                <label>
-                  Share Phone <input type="checkbox"></input>
-                </label>
+              <div style={{ display: "flex", flexDirection: "column" }}>
+                <FormControlLabel control={<Switch />} label="Share Email" />
+                <FormControlLabel control={<Switch />} label="Share Phone" />
               </div>
             </div>
             <Messenger></Messenger>
