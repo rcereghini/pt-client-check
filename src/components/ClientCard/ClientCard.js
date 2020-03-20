@@ -108,12 +108,13 @@ const ClientCard = props => {
                 padding: "2em",
                 display: "flex",
                 flexDirection: "column",
+                maxWidth: "315px",
                 alignItems: "center"
               }}
             >
               <img className="avatar" src={props.avatar}></img>
 
-              <p>{props.client.name}</p>
+              <p style={{ fontSize: "1.5em" }}>{props.client.name}</p>
               {/* <p>
                 <a href={`tel:${props.client.phone}`}>{props.client.phone}</a>
                 </p>
