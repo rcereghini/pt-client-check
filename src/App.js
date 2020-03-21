@@ -1,21 +1,25 @@
 import React, { useState } from "react";
-import UserCalendar from "./components/UserCalendar/UserCalendar";
 import "./App.css";
 import Button from "@material-ui/core/Button";
+import Modal from "@material-ui/core/Modal";
+import Icon from "@material-ui/core/Icon";
+import { makeStyles } from "@material-ui/core/styles";
+import { deepOrange, deepPurple } from "@material-ui/core/colors";
+import AlarmAddIcon from "@material-ui/icons/AddCircle";
 
+import UserCalendar from "./components/UserCalendar/UserCalendar";
 import ClientList from "./components/ClientList/ClientList";
 import Profile from "./components/Profile/Profile";
 import Settings from "./components/Settings/Settings";
 import BottomNav from "./components/BottomNav/BottomNav";
 import ClientChips from "./components/ClientChips/ClientChips";
-import { makeStyles } from "@material-ui/core/styles";
-import AlarmAddIcon from "@material-ui/icons/AddCircle";
-import Icon from "@material-ui/core/Icon";
-import { deepOrange, deepPurple } from "@material-ui/core/colors";
-import clients from "./assets/clientList";
 import AddSessionForm from "./components/AddSessionForm/AddSessionForm";
-import Modal from "@material-ui/core/Modal";
 import Header from "./components/Header/Header";
+import SignUp from "./components/SignUp/SignUp";
+
+import clients from "./assets/clientList";
+
+import { Switch, Route, Redirect, Link } from "react-router-dom";
 
 function App() {
   const [currentScreen, setCurrentScreen] = useState(0);
@@ -79,22 +83,69 @@ function App() {
       </div>
       <hr></hr>
 
+      <Switch>
+        <Route
+          exact
+          path="/signup"
+          // component={SignIn}
+          render={() => <SignUp />}
+          // this.props.currentUser ? <Redirect to="/" /> : <SignUp />
+        />
+        <Route
+          exact
+          path="/profile"
+          render={() =>
+            this.props.currentUser ? (
+              <Profile currentUser={this.props.currentUser} />
+            ) : (
+              <Redirect to="/" />
+            )
+          }
+        />
+        <Route
+          exact
+          path="/buddies"
+          render={() =>
+            this.props.currentUser ? <ClientList /> : <Redirect to="/" />
+          }
+        />
+        <Route
+          exact
+          path="/schedule"
+          render={() =>
+            this.props.currentUser ? (
+              <UserCalendar currentUser={this.props.currentUser} />
+            ) : (
+              <Redirect to="/" />
+            )
+          }
+        />
+        <Route
+          exact
+          path="/"
+          render={
+            () => (
+              // this.props.currentUser ? (
+              <div
+                style={{
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  flexDirection: "column"
+                }}
+              >
+                <UserCalendar />
+              </div>
+            )
+            // ) : (
+            // <SignIn />
+            // )
+          }
+        />
+      </Switch>
+
       <div className="navigation-container">
         {currentScreen === 2 ? <ClientList clients={clients} /> : null}
-        {currentScreen === 0 ? (
-          <div
-            style={{
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-              flexDirection: "column"
-            }}
-          >
-            <UserCalendar />
-            <span style={{ marginTop: "2em" }}></span>
-            <ClientChips clients={clients}></ClientChips>
-          </div>
-        ) : null}
         {currentScreen === 1 ? <p>Messages or Achievemnts</p> : null}
         {currentScreen === 4 ? <Profile></Profile> : null}
         {currentScreen === 5 ? <Settings></Settings> : null}

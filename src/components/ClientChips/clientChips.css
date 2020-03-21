@@ -1,6 +1,8 @@
 .client-chip-list {
   display: flex;
   margin: 1em;
+  margin-top: 3em;
+  justify-content: center;
 }
 .client-chip-container {
   margin: 0.3em;

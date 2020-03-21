@@ -3,7 +3,14 @@ import "firebase/firestore";
 import "firebase/auth";
 
 const config = {
-  //INSERT CONFIG HERE
+  apiKey: "AIzaSyBbBE-G2_JSQgxfruNuVvrmTcvrBdFbHXc",
+  authDomain: "pt-client-check.firebaseapp.com",
+  databaseURL: "https://pt-client-check.firebaseio.com",
+  projectId: "pt-client-check",
+  storageBucket: "pt-client-check.appspot.com",
+  messagingSenderId: "252176957995",
+  appId: "1:252176957995:web:fbdbe5004eec11b0caa06e",
+  measurementId: "G-ETEN6NDN7W"
 };
 
 export const createUserProfileDocument = async (userAuth, additionalData) => {

@@ -7,14 +7,14 @@ export default [
     allDay: true,
     start: new Date(2020, 2, 7),
     end: new Date(2020, 2, 8),
-    userId: ""
+    userId: 1
   },
   {
     id: 1,
     title: "Run along the lake",
     start: new Date(2020, 2, 7),
     end: new Date(2020, 2, 10),
-    userId: ""
+    userId: 2
   },
 
   {
@@ -22,6 +22,6 @@ export default [
     title: "DTS STARTS",
     start: new Date(2020, 2, 15, 14, 0, 0),
     end: new Date(2020, 2, 15, 15, 0, 0),
-    userId: ""
+    userId: 3
   }
 ];
