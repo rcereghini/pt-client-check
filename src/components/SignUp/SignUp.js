@@ -19,8 +19,6 @@ const SignUp = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-  const [alertText, setAlertText] = useState("");
-  const [isModalActive, setIsModalActive] = useState(false);
 
   const useStyles = makeStyles(theme => ({
     button: {
@@ -43,15 +41,27 @@ const SignUp = () => {
 
   const classes = useStyles();
 
-  const handleDisplayNameChange = displayName => {
-    console.log("e =>", displayName);
-    // setDisplayName(displayName);
+  const handleDisplayNameChange = e => {
+    setDisplayName(e.target.value);
+  };
+  const handleFirstNameChange = e => {
+    setFirstName(e.target.value);
+  };
+  const handleLastNameChange = e => {
+    setLastName(e.target.value);
+  };
+  const handleEmailChange = e => {
+    setEmail(e.target.value);
+  };
+  const handlePasswordChange = e => {
+    setPassword(e.target.value);
+  };
+  const handleConfirmPasswordChange = e => {
+    setConfirmPassword(e.target.value);
   };
 
   const handleSubmit = async event => {
     event.preventDefault();
-
-    const { displayName, email, password, confirmPassword } = this.state;
 
     if (password !== confirmPassword) {
       alert("passwords don't match");
@@ -59,36 +69,33 @@ const SignUp = () => {
     }
 
     try {
-      console.log("creating user ");
+      console.log("email", email);
+      console.log("password", password);
       const { user } = await auth.createUserWithEmailAndPassword(
         email,
         password
       );
 
-      console.log("user ===>>>>", user);
-      await createUserProfileDocument(user, { displayName, homeGym: {} });
+      console.log("user =>", user);
 
-      this.setState({
-        displayName: "",
-        firstName: "",
-        lastName: "",
-        email: "",
-        password: "",
-        confirmPassword: ""
-      });
+      await createUserProfileDocument(user);
+
+      setDisplayName("");
+      setFirstName("");
+      setLastName("");
+      setEmail("");
+      setPassword("");
+      setConfirmPassword("");
     } catch (error) {
-      this.setState({
-        alertText:
-          error.message +
-          " If account was created via Sign In With Google, please use that login method.",
-        isModalActive: true
-      });
+      //   this.setState({
+      //     alertText:
+      //       error.message +
+      //       " If account was created via Sign In With Google, please use that login method.",
+      //     isModalActive: true
+      //   });
     }
   };
-  const handleInputChange = event => {
-    //   const { name, value } = event.target;
-    //   this.setState({ [name]: value });
-  };
+
   return (
     <div className="form-wrap" style={{ width: "90%", maxWidth: "360px" }}>
       <Link
@@ -114,76 +121,39 @@ const SignUp = () => {
           onChange={e => handleDisplayNameChange(e)}
           required
         ></TextField>
-        <TextField label="First Name" required></TextField>
-        <TextField label="Last Name" required></TextField>
-        <TextField label="Email" required></TextField>
-        <TextField label="Password" required></TextField>
-        <TextField label="Confirm Password" required></TextField>
-        {/* <label>
-              Display Name:
-              <input
-                name="displayName"
-                type="text"
-                value={displayName}
-                onChange={this.handleInputChange}
-                required
-              />
-            </label> */}
-        {/* <br />
-            <label>
-              First Name:
-              <input
-                name="firstName"
-                type="text"
-                value={firstName}
-                onChange={this.handleInputChange}
-                required
-              />
-            </label>
-            <br />
-            <label>
-              Last Name:
-              <input
-                name="lastName"
-                type="text"
-                value={lastName}
-                onChange={this.handleInputChange}
-                required
-              />
-            </label>
-            <br />
-            <label>
-              Email:
-              <input
-                name="email"
-                type="text"
-                value={email}
-                onChange={this.handleInputChange}
-                required
-              />
-            </label>
-            <br />
-            <label>
-              Password:
-              <input
-                name="password"
-                type="password"
-                value={password}
-                onChange={this.handleInputChange}
-                required
-              />
-            </label>
-            <br />
-            <label>
-              Confirm Password:
-              <input
-                name="confirmPassword"
-                type="password"
-                value={confirmPassword}
-                onChange={this.handleInputChange}
-                required
-              />
-            </label> */}
+        <TextField
+          label="First Name"
+          value={firstName}
+          onChange={e => handleFirstNameChange(e)}
+          required
+        ></TextField>
+        <TextField
+          label="Last Name"
+          value={lastName}
+          onChange={e => handleLastNameChange(e)}
+          required
+        ></TextField>
+        <TextField
+          label="Email"
+          value={email}
+          type="email"
+          onChange={e => handleEmailChange(e)}
+          required
+        ></TextField>
+        <TextField
+          label="Password"
+          value={password}
+          onChange={e => handlePasswordChange(e)}
+          type="password"
+          required
+        ></TextField>
+        <TextField
+          label="Confirm Password"
+          value={confirmPassword}
+          onChange={e => handleConfirmPasswordChange(e)}
+          type="password"
+          required
+        ></TextField>
         <div className="submit-button-wrap">
           <Button
             variant="contained"
@@ -204,18 +174,8 @@ const SignUp = () => {
           >
             Sign In With Google
           </Button>
-          {/* <input className="submit-button" type="submit" value="Submit" /> */}
-          {/* <button className="google-button" onClick={signInWithGoogle}>
-                Sign In With Google
-              </button> */}
         </div>
       </form>
-      {/* {this.state.isModalActive ? (
-            <Modal
-              innerText={this.state.alertText}
-              setInactive={() => this.setState({ isModalActive: false })}
-            ></Modal>
-          ) : null} */}
     </div>
   );
 };
