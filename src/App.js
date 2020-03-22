@@ -196,7 +196,8 @@ function App(props) {
           }
         />
       </Switch>
-
+      <SignIn></SignIn>
+      <SignUp></SignUp>
       <div className="navigation-container">
         {/* {currentScreen === 2 ? <ClientList clients={clients} /> : null} */}
         {currentScreen === 5 ? <Settings></Settings> : null}
