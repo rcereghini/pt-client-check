@@ -3,6 +3,7 @@ import Button from "@material-ui/core/Button";
 import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
 import MenuIcon from "@material-ui/icons/Menu";
+import { Link } from "react-router-dom";
 import Icon from "@material-ui/core/Icon";
 
 const Header = props => {
@@ -18,7 +19,7 @@ const Header = props => {
   };
 
   const navigateHandler = navNum => {
-    props.navChangeCallback(navNum);
+    // props.navChangeCallback(navNum);
     handleClose();
   };
 
@@ -38,9 +39,13 @@ const Header = props => {
         open={Boolean(anchorEl)}
         onClose={handleClose}
       >
-        <MenuItem onClick={() => navigateHandler(4)}>Profile</MenuItem>
-        <MenuItem onClick={() => navigateHandler(5)}>Settings</MenuItem>
-        <MenuItem>Logout</MenuItem>
+        <Link to="/profile">
+          <MenuItem onClick={handleClose}>Profile</MenuItem>
+        </Link>
+        <Link to="/settings">
+          <MenuItem onClick={handleClose}>Settings</MenuItem>
+        </Link>
+        <MenuItem onClick={handleClose}>Logout</MenuItem>
       </Menu>
     </div>
   );

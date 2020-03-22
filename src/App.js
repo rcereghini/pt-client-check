@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./App.css";
 import Button from "@material-ui/core/Button";
 import Modal from "@material-ui/core/Modal";
@@ -8,6 +8,7 @@ import { deepOrange, deepPurple } from "@material-ui/core/colors";
 import AlarmAddIcon from "@material-ui/icons/AddCircle";
 
 import UserCalendar from "./components/UserCalendar/UserCalendar";
+import Nudges from "./components/Nudges/Nudges";
 import ClientList from "./components/ClientList/ClientList";
 import Profile from "./components/Profile/Profile";
 import Settings from "./components/Settings/Settings";
@@ -16,12 +17,15 @@ import ClientChips from "./components/ClientChips/ClientChips";
 import AddSessionForm from "./components/AddSessionForm/AddSessionForm";
 import Header from "./components/Header/Header";
 import SignUp from "./components/SignUp/SignUp";
+import SignIn from "./components/SignIn/SignIn";
+import { auth, createUserProfileDocument } from "./firebase/firebase.utils";
+import { setCurrentUser } from "./redux/user/user.actions";
 
 import clients from "./assets/clientList";
 
 import { Switch, Route, Redirect, Link } from "react-router-dom";
 
-function App() {
+function App(props) {
   const [currentScreen, setCurrentScreen] = useState(0);
 
   const useStyles = makeStyles(theme => ({
@@ -54,6 +58,26 @@ function App() {
   const handleClose = () => {
     setOpen(false);
   };
+
+  let unsubscribeFromAuth = null;
+
+  useEffect(() => {
+    unsubscribeFromAuth = auth.onAuthStateChanged(async userAuth => {
+      if (userAuth) {
+        const userRef = await createUserProfileDocument(userAuth);
+
+        userRef.onSnapshot(snapShot => {
+          setCurrentUser({
+            id: snapShot.id,
+            ...snapShot.data()
+          });
+        });
+      }
+
+      setCurrentUser(userAuth);
+    });
+  });
+
   return (
     <div className="App">
       <div
@@ -94,21 +118,28 @@ function App() {
         <Route
           exact
           path="/profile"
-          render={() =>
-            this.props.currentUser ? (
-              <Profile currentUser={this.props.currentUser} />
-            ) : (
-              <Redirect to="/" />
+          render={
+            () => (
+              // this.props.currentUser ? (
+              <Profile />
             )
+            // ) : (
+            // <Redirect to="/" />
+            // )
           }
         />
         <Route
           exact
           path="/buddies"
-          render={() =>
-            this.props.currentUser ? <ClientList /> : <Redirect to="/" />
+          render={
+            () => (
+              // this.props.currentUser ?
+              <ClientList clients={clients} />
+            )
+            //  : <Redirect to="/" />
           }
         />
+        <Route exact path="/nudges" render={() => <Nudges />} />
         <Route
           exact
           path="/schedule"
@@ -142,24 +173,44 @@ function App() {
             // )
           }
         />
+        <Route
+          exact
+          path="/settings"
+          render={
+            () => (
+              // this.props.currentUser ?
+              <Settings></Settings>
+            )
+            //  : <Redirect to="/" />
+          }
+        />
+        <Route
+          exact
+          path="/signin"
+          render={
+            () => (
+              // this.props.currentUser ?
+              <SignIn></SignIn>
+            )
+            //  : <Redirect to="/" />
+          }
+        />
       </Switch>
 
       <div className="navigation-container">
-        {currentScreen === 2 ? <ClientList clients={clients} /> : null}
-        {currentScreen === 1 ? <p>Messages or Achievemnts</p> : null}
-        {currentScreen === 4 ? <Profile></Profile> : null}
+        {/* {currentScreen === 2 ? <ClientList clients={clients} /> : null} */}
         {currentScreen === 5 ? <Settings></Settings> : null}
         <span style={{ marginTop: "2em" }}></span>
       </div>
       <span style={{ marginTop: "3em" }}></span>
       <BottomNav
+        className="bottom-nav"
         navChangeCallback={i => {
           console.log("setting current screen", i);
-          setCurrentScreen(i);
+          // setCurrentScreen(i);
           console.log("hi", i);
         }}
       ></BottomNav>
-      {/* <AddSessionForm></AddSessionForm> */}
       <Modal
         aria-labelledby="simple-modal-title"
         aria-describedby="simple-modal-description"

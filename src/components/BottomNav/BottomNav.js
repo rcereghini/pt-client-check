@@ -5,6 +5,8 @@ import BottomNavigationAction from "@material-ui/core/BottomNavigationAction";
 import PermContactCalendarIcon from "@material-ui/icons/PermContactCalendar";
 import ScheduleIcon from "@material-ui/icons/Schedule";
 import EmailIcon from "@material-ui/icons/Email";
+import { Link } from "react-router-dom";
+
 import PlayCircleOutlineIcon from "@material-ui/icons/PlayCircleOutline";
 
 const useStyles = makeStyles({
@@ -28,12 +30,21 @@ export default function SimpleBottomNavigation(props) {
       className={classes.root}
     >
       {/* <BottomNavigationAction label="Recents" /> */}
-      <BottomNavigationAction label="Chart" icon={<ScheduleIcon />} />
-      <BottomNavigationAction label="Nudges" icon={<PlayCircleOutlineIcon />} />
-      <BottomNavigationAction
-        label="Buddies"
-        icon={<PermContactCalendarIcon />}
-      />
+      <Link to="/">
+        <BottomNavigationAction label="Chart" icon={<ScheduleIcon />} />
+      </Link>
+      <Link to="/nudges">
+        <BottomNavigationAction
+          label="Nudges"
+          icon={<PlayCircleOutlineIcon />}
+        />
+      </Link>
+      <Link to="/buddies">
+        <BottomNavigationAction
+          label="Buddies"
+          icon={<PermContactCalendarIcon />}
+        />
+      </Link>
     </BottomNavigation>
   );
 }
