@@ -45,7 +45,17 @@ const SignIn = () => {
 
     try {
       await auth.signInWithEmailAndPassword(email, password);
-    } catch (error) {}
+    } catch (error) {
+      if (error.code === "auth/invalid-email") {
+        document.querySelector("#emailInput").setCustomValidity(error.message);
+      }
+      if (error.code === "auth/wrong-password") {
+        document
+          .querySelector("#passwordInput")
+          .setCustomValidity(error.message);
+      }
+      console.log(error);
+    }
   };
 
   return (
@@ -56,12 +66,14 @@ const SignIn = () => {
         style={{ display: "flex", flexDirection: "column" }}
       >
         <TextField
+          id="emailInput"
           onChange={handleEmailChange}
           value={email}
           label="Email"
           required
         ></TextField>
         <TextField
+          id="passwordInput"
           onChange={handlePasswordChange}
           value={password}
           label="Password"
@@ -71,6 +83,7 @@ const SignIn = () => {
 
         <div className="submit-button-wrap">
           <Button
+            id="submitButton"
             variant="contained"
             color="primary"
             className={classes.button}

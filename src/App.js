@@ -20,6 +20,7 @@ import SignUp from "./components/SignUp/SignUp";
 import SignIn from "./components/SignIn/SignIn";
 import { auth, createUserProfileDocument } from "./firebase/firebase.utils";
 import { setCurrentUser } from "./redux/user/user.actions";
+import { connect } from "react-redux";
 
 import clients from "./assets/clientList";
 
@@ -48,6 +49,7 @@ function App(props) {
   }));
 
   const classes = useStyles();
+  const { setCurrentUser } = props;
 
   const [open, setOpen] = React.useState(false);
 
@@ -101,7 +103,6 @@ function App(props) {
         <Header
           navChangeCallback={i => {
             setCurrentScreen(i);
-            console.log("hi", i);
           }}
         ></Header>
       </div>
@@ -154,9 +155,8 @@ function App(props) {
         <Route
           exact
           path="/"
-          render={
-            () => (
-              // this.props.currentUser ? (
+          render={() => {
+            return props.currentUser ? (
               <div
                 style={{
                   display: "flex",
@@ -167,11 +167,10 @@ function App(props) {
               >
                 <UserCalendar />
               </div>
-            )
-            // ) : (
-            // <SignIn />
-            // )
-          }
+            ) : (
+              <SignIn />
+            );
+          }}
         />
         <Route
           exact
@@ -196,8 +195,6 @@ function App(props) {
           }
         />
       </Switch>
-      <SignIn></SignIn>
-      <SignUp></SignUp>
       <div className="navigation-container">
         {/* {currentScreen === 2 ? <ClientList clients={clients} /> : null} */}
         {currentScreen === 5 ? <Settings></Settings> : null}
@@ -212,6 +209,13 @@ function App(props) {
           console.log("hi", i);
         }}
       ></BottomNav>
+      <button
+        onClick={() => {
+          console.log("this.props =>", props);
+        }}
+      >
+        Test
+      </button>
       <Modal
         aria-labelledby="simple-modal-title"
         aria-describedby="simple-modal-description"
@@ -232,4 +236,13 @@ function App(props) {
   );
 }
 
-export default App;
+const mapStateToProps = ({ user }) => {
+  return {
+    currentUser: user.currentUser
+  };
+};
+const mapDispatchToProps = dispatch => ({
+  setCurrentUser: user => dispatch(setCurrentUser(user))
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);

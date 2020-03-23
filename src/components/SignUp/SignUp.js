@@ -78,7 +78,7 @@ const SignUp = () => {
 
       console.log("user =>", user);
 
-      await createUserProfileDocument(user);
+      await createUserProfileDocument(user, { firstName, lastName, password });
 
       setDisplayName("");
       setFirstName("");

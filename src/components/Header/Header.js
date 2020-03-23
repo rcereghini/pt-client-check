@@ -5,6 +5,7 @@ import MenuItem from "@material-ui/core/MenuItem";
 import MenuIcon from "@material-ui/icons/Menu";
 import { Link } from "react-router-dom";
 import Icon from "@material-ui/core/Icon";
+import { auth } from "../../firebase/firebase.utils";
 
 const Header = props => {
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -16,6 +17,11 @@ const Header = props => {
 
   const handleClose = () => {
     setAnchorEl(null);
+  };
+
+  const signOutAndClose = () => {
+    auth.signOut();
+    handleClose();
   };
 
   const navigateHandler = navNum => {
@@ -45,7 +51,7 @@ const Header = props => {
         <Link to="/settings">
           <MenuItem onClick={handleClose}>Settings</MenuItem>
         </Link>
-        <MenuItem onClick={handleClose}>Logout</MenuItem>
+        <MenuItem onClick={signOutAndClose}>Logout</MenuItem>
       </Menu>
     </div>
   );
