@@ -4,7 +4,6 @@ import Button from "@material-ui/core/Button";
 import Modal from "@material-ui/core/Modal";
 import Icon from "@material-ui/core/Icon";
 import { makeStyles } from "@material-ui/core/styles";
-import { deepOrange, deepPurple } from "@material-ui/core/colors";
 import AlarmAddIcon from "@material-ui/icons/AddCircle";
 
 import UserCalendar from "./components/UserCalendar/UserCalendar";
@@ -13,7 +12,6 @@ import ClientList from "./components/ClientList/ClientList";
 import Profile from "./components/Profile/Profile";
 import Settings from "./components/Settings/Settings";
 import BottomNav from "./components/BottomNav/BottomNav";
-import ClientChips from "./components/ClientChips/ClientChips";
 import AddSessionForm from "./components/AddSessionForm/AddSessionForm";
 import Header from "./components/Header/Header";
 import SignUp from "./components/SignUp/SignUp";
