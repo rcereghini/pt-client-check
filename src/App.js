@@ -81,30 +81,32 @@ function App(props) {
 
   return (
     <div className="App">
-      <div
-        style={{
-          width: "1000px",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "space-between"
-        }}
-      >
-        <Button
-          variant="contained"
-          color="primary"
-          className={classes.button}
-          startIcon={<AlarmAddIcon />}
-          style={{ alignSelf: "flex-end", marginBottom: "1.5em" }}
-          onClick={handleOpen}
-        >
-          Add Event
-        </Button>
-        <Header
-          navChangeCallback={i => {
-            setCurrentScreen(i);
+      {props.currentUser ? (
+        <div
+          style={{
+            width: "1000px",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "space-between"
           }}
-        ></Header>
-      </div>
+        >
+          <Button
+            variant="contained"
+            color="primary"
+            className={classes.button}
+            startIcon={<AlarmAddIcon />}
+            style={{ alignSelf: "flex-end", marginBottom: "1.5em" }}
+            onClick={handleOpen}
+          >
+            Add Event
+          </Button>
+          <Header
+            navChangeCallback={i => {
+              setCurrentScreen(i);
+            }}
+          ></Header>
+        </div>
+      ) : null}
       <hr></hr>
 
       <Switch>
@@ -186,7 +188,12 @@ function App(props) {
         <span style={{ marginTop: "2em" }}></span>
       </div>
       <span style={{ marginTop: "3em" }}></span>
-      <BottomNav className="bottom-nav" navChangeCallback={i => {}}></BottomNav>
+      {props.currentUser ? (
+        <BottomNav
+          className="bottom-nav"
+          navChangeCallback={i => {}}
+        ></BottomNav>
+      ) : null}
       <Modal
         aria-labelledby="simple-modal-title"
         aria-describedby="simple-modal-description"
