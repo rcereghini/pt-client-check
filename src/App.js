@@ -63,21 +63,20 @@ function App(props) {
 
   let unsubscribeFromAuth = null;
 
-  useEffect(() => {
-    unsubscribeFromAuth = auth.onAuthStateChanged(async userAuth => {
-      if (userAuth) {
-        const userRef = await createUserProfileDocument(userAuth);
+  unsubscribeFromAuth = auth.onAuthStateChanged(async userAuth => {
+    if (userAuth) {
+      const userRef = await createUserProfileDocument(userAuth);
 
-        userRef.onSnapshot(snapShot => {
-          setCurrentUser({
-            id: snapShot.id,
-            ...snapShot.data()
-          });
+      userRef.onSnapshot(snapShot => {
+        setCurrentUser({
+          id: snapShot.id,
+          ...snapShot.data()
         });
-      }
+      });
+    }
 
-      setCurrentUser(userAuth);
-    });
+    // setCurrentUser(userAuth);
+    // useEffect(() => {});
   });
 
   return (
@@ -113,21 +112,12 @@ function App(props) {
           exact
           path="/signup"
           // component={SignIn}
-          render={() => <SignUp />}
-          // this.props.currentUser ? <Redirect to="/" /> : <SignUp />
+          render={() => (props.currentUser ? <Redirect to="/" /> : <SignUp />)}
         />
         <Route
           exact
           path="/profile"
-          render={
-            () => (
-              // this.props.currentUser ? (
-              <Profile />
-            )
-            // ) : (
-            // <Redirect to="/" />
-            // )
-          }
+          render={() => (props.currentUser ? <Profile /> : <Redirect to="/" />)}
         />
         <Route
           exact

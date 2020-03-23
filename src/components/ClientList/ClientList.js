@@ -16,7 +16,6 @@ const ClientList = props => {
     <div className="client-list">
       <AddUserButton></AddUserButton>
       {props.clients.map((client, i) => {
-        console.log("client ==>", client);
         return (
           <ClientCard
             client={client}
