@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-// import Modal from "../Modal/Modal";
 import TextField from "@material-ui/core/TextField";
 
 import { Link } from "react-router-dom";
@@ -8,24 +7,24 @@ import { makeStyles } from "@material-ui/core/styles";
 
 import avatar from "../../assets/images/avatar1.jpeg";
 
-import {
-  auth,
-  storage,
-  createUserProfileDocument,
-  signInWithGoogle
-} from "../../firebase/firebase.utils";
+import { storage, firestore } from "../../firebase/firebase.utils";
 
 const Profile = props => {
-  console.log("props =>", props);
-  const [displayName, setDisplayName] = useState("");
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
+  const [displayName, setDisplayName] = useState(
+    props.currentUser.displayName ? props.currentUser.displayName : ""
+  );
 
-  const [avatarUrl, setAvatarUrl] = useState("");
+  const [avatarUrl, setAvatarUrl] = useState(
+    props.currentUser.avatarUrl ? props.currentUser.avatarUrl : ""
+  );
 
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
+  const [email, setEmail] = useState(
+    props.currentUser.email ? props.currentUser.email : ""
+  );
+
+  const [quote, setQuote] = useState(
+    props.currentUser.quote ? props.currentUser.quote : ""
+  );
 
   const useStyles = makeStyles(theme => ({
     button: {
@@ -51,116 +50,89 @@ const Profile = props => {
   const handleDisplayNameChange = e => {
     setDisplayName(e.target.value);
   };
-  const handleFirstNameChange = e => {
-    setFirstName(e.target.value);
-  };
-  const handleLastNameChange = e => {
-    setLastName(e.target.value);
-  };
+
   const handleEmailChange = e => {
     setEmail(e.target.value);
   };
-  const handlePasswordChange = e => {
-    setPassword(e.target.value);
-  };
-  const handleConfirmPasswordChange = e => {
-    setConfirmPassword(e.target.value);
-  };
 
-  const handleAvatarUrlChange = e => {
-    setAvatarUrl(e);
-  };
-
-  const updateAvatar = async event => {
-    event.preventDefault();
+  const handleQuoteChange = e => {
+    setQuote(e.target.value);
   };
 
   const handleSubmit = async event => {
     event.preventDefault();
 
-    if (password !== confirmPassword) {
-      alert("passwords don't match");
-      return;
-    }
+    const packagedFields = {
+      ...props.currentUser,
+      displayName,
+      avatarUrl,
+      quote
+    };
 
-    try {
-      setDisplayName("");
-      setFirstName("");
-      setLastName("");
-      setEmail("");
-      setPassword("");
-      setConfirmPassword("");
-    } catch (error) {
-      console.log("error =>", error);
-    }
+    firestore
+      .collection("users")
+      .doc(props.currentUser.id)
+      .set({
+        ...packagedFields
+      });
   };
 
   return (
     <div className="form-wrap" style={{ width: "90%", maxWidth: "360px" }}>
-      <Link
-        to="/"
-        style={{
-          position: "fixed",
-          top: "1em",
-          right: "1em",
-          fontSize: 24,
-          textDecoration: "none"
-        }}
-      >
-        Back
-      </Link>
       <h1>Profile</h1>
       <div>
         <img className="avatar" src={avatarUrl ? avatarUrl : avatar}></img>
-        <form onSubmit={updateAvatar}>
-          <input
-            type="file"
-            accept="image/*"
-            onChange={e => {
-              if (e.target.files[0])
-                storage
-                  .ref()
-                  .child(`images/${e.target.files[0].name}`)
-                  .put(e.target.files[0])
-                  .then(res => {
-                    storage
-                      .ref(res.metadata.fullPath)
-                      .getDownloadURL()
-                      .then(url => setAvatarUrl(url));
-                  });
-            }}
-          ></input>
-          <Button
-            variant="contained"
-            color="primary"
-            className={classes.button}
-            style={{ margin: "0em", marginTop: "3em" }}
-            type="submit"
-          >
-            Update Avatar
-          </Button>
-        </form>
       </div>
 
       <form
         onSubmit={handleSubmit}
         style={{ display: "flex", flexDirection: "column" }}
       >
+        <input
+          type="file"
+          accept="image/*"
+          onChange={e => {
+            if (e.target.files[0])
+              storage
+                .ref()
+                .child(
+                  `images/${props.currentUser.id}/${e.target.files[0].name}`
+                )
+                .put(e.target.files[0])
+                .then(res => {
+                  console.log("res =>", res);
+                  storage
+                    .ref(res.metadata.fullPath)
+                    .getDownloadURL()
+                    .then(url => setAvatarUrl(url));
+                });
+          }}
+        ></input>
+        <span style={{ margin: "1em" }}></span>
         <TextField
           label="Display Name"
           value={displayName}
           onChange={e => handleDisplayNameChange(e)}
           required
         ></TextField>
+        <span style={{ margin: "1em" }}></span>
 
-        <TextField
+        {/* <TextField
           label="Email"
           value={email}
           type="email"
           onChange={e => handleEmailChange(e)}
           required
+        ></TextField> */}
+        <TextField
+          label="Quote"
+          value={quote}
+          type="text"
+          multiline
+          onChange={e => handleQuoteChange(e)}
         ></TextField>
 
+        <span style={{ margin: "1em" }}></span>
         <div className="submit-button-wrap">
           <Button
             variant="contained"

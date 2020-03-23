@@ -111,23 +111,28 @@ function App(props) {
         <Route
           exact
           path="/signup"
-          // component={SignIn}
           render={() => (props.currentUser ? <Redirect to="/" /> : <SignUp />)}
         />
         <Route
           exact
           path="/profile"
-          render={() => (props.currentUser ? <Profile /> : <Redirect to="/" />)}
+          render={() =>
+            props.currentUser ? (
+              <Profile currentUser={props.currentUser} />
+            ) : (
+              <Redirect to="/" />
+            )
+          }
         />
         <Route
           exact
           path="/buddies"
-          render={
-            () => (
-              // this.props.currentUser ?
+          render={() =>
+            props.currentUser ? (
               <ClientList clients={clients} />
+            ) : (
+              <Redirect to="/" />
             )
-            //  : <Redirect to="/" />
           }
         />
         <Route exact path="/nudges" render={() => <Nudges />} />
@@ -135,7 +140,7 @@ function App(props) {
           exact
           path="/schedule"
           render={() =>
-            this.props.currentUser ? (
+            props.currentUser ? (
               <UserCalendar currentUser={this.props.currentUser} />
             ) : (
               <Redirect to="/" />
@@ -165,40 +170,23 @@ function App(props) {
         <Route
           exact
           path="/settings"
-          render={
-            () => (
-              // this.props.currentUser ?
-              <Settings></Settings>
-            )
-            //  : <Redirect to="/" />
+          render={() =>
+            props.currentUser ? <Settings></Settings> : <Redirect to="/" />
           }
         />
         <Route
           exact
           path="/signin"
-          render={
-            () => (
-              // this.props.currentUser ?
-              <SignIn></SignIn>
-            )
-            //  : <Redirect to="/" />
+          render={() =>
+            !props.currentUser ? <SignIn></SignIn> : <Redirect to="/" />
           }
         />
       </Switch>
       <div className="navigation-container">
-        {/* {currentScreen === 2 ? <ClientList clients={clients} /> : null} */}
-        {currentScreen === 5 ? <Settings></Settings> : null}
         <span style={{ marginTop: "2em" }}></span>
       </div>
       <span style={{ marginTop: "3em" }}></span>
-      <BottomNav
-        className="bottom-nav"
-        navChangeCallback={i => {
-          console.log("setting current screen", i);
-          // setCurrentScreen(i);
-          console.log("hi", i);
-        }}
-      ></BottomNav>
+      <BottomNav className="bottom-nav" navChangeCallback={i => {}}></BottomNav>
       <Modal
         aria-labelledby="simple-modal-title"
         aria-describedby="simple-modal-description"
