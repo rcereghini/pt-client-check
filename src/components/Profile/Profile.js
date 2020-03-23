@@ -16,9 +16,13 @@ import {
 } from "../../firebase/firebase.utils";
 
 const Profile = props => {
+  console.log("props =>", props);
   const [displayName, setDisplayName] = useState("");
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
+
+  const [avatarUrl, setAvatarUrl] = useState("");
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
@@ -63,6 +67,10 @@ const Profile = props => {
     setConfirmPassword(e.target.value);
   };
 
+  const handleAvatarUrlChange = e => {
+    setAvatarUrl(e);
+  };
+
   const updateAvatar = async event => {
     event.preventDefault();
   };
@@ -83,12 +91,7 @@ const Profile = props => {
       setPassword("");
       setConfirmPassword("");
     } catch (error) {
-      //   this.setState({
-      //     alertText:
-      //       error.message +
-      //       " If account was created via Sign In With Google, please use that login method.",
-      //     isModalActive: true
-      //   });
+      console.log("error =>", error);
     }
   };
 
@@ -108,16 +111,23 @@ const Profile = props => {
       </Link>
       <h1>Profile</h1>
       <div>
-        <img className="avatar" src={avatar}></img>
+        <img className="avatar" src={avatarUrl ? avatarUrl : avatar}></img>
         <form onSubmit={updateAvatar}>
           <input
             type="file"
             accept="image/*"
             onChange={e => {
-              console.log("e =>", e.target);
-              storage
-                .child(`images/${e.target.files[0].name}`)
-                .put(e.target.files[0]);
+              if (e.target.files[0])
+                storage
+                  .ref()
+                  .child(`images/${e.target.files[0].name}`)
+                  .put(e.target.files[0])
+                  .then(res => {
+                    storage
+                      .ref(res.metadata.fullPath)
+                      .getDownloadURL()
+                      .then(url => setAvatarUrl(url));
+                  });
             }}
           ></input>
           <Button

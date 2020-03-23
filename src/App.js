@@ -199,13 +199,6 @@ function App(props) {
           console.log("hi", i);
         }}
       ></BottomNav>
-      <button
-        onClick={() => {
-          console.log("this.props =>", props);
-        }}
-      >
-        Test
-      </button>
       <Modal
         aria-labelledby="simple-modal-title"
         aria-describedby="simple-modal-description"
