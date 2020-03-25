@@ -16,7 +16,11 @@ import AddSessionForm from "./components/AddSessionForm/AddSessionForm";
 import Header from "./components/Header/Header";
 import SignUp from "./components/SignUp/SignUp";
 import SignIn from "./components/SignIn/SignIn";
-import { auth, createUserProfileDocument } from "./firebase/firebase.utils";
+import {
+  auth,
+  firestore,
+  createUserProfileDocument
+} from "./firebase/firebase.utils";
 import { setCurrentUser } from "./redux/user/user.actions";
 import { connect } from "react-redux";
 
@@ -59,6 +63,13 @@ function App(props) {
     setOpen(false);
   };
 
+  Notification.requestPermission();
+  setTimeout(() => {
+    let testNotification = new Notification("test", {
+      requireInteraction: true
+    });
+  }, 5000);
+
   let unsubscribeFromAuth = null;
 
   unsubscribeFromAuth = auth.onAuthStateChanged(async userAuth => {
@@ -74,7 +85,15 @@ function App(props) {
     }
 
     // setCurrentUser(userAuth);
-    // useEffect(() => {});
+  });
+  let users = [];
+
+  useEffect(() => {
+    firestore.collection("users").onSnapshot(function(querySnapshot) {
+      querySnapshot.forEach(function(doc) {
+        users.push(doc.data());
+      });
+    });
   });
 
   return (

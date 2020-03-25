@@ -1,7 +1,7 @@
 import React from "react";
 
 const Nudges = () => {
-  return <div>Nudges</div>;
+  return <div>Nudge it Forward</div>;
 };
 
 export default Nudges;
