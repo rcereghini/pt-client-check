@@ -69,6 +69,8 @@ const Profile = props => {
       quote
     };
 
+    console.log("packagedFields =>", packagedFields);
+
     firestore
       .collection("users")
       .doc(props.currentUser.id)

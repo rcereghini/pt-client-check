@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import "./App.css";
 import Button from "@material-ui/core/Button";
 import Modal from "@material-ui/core/Modal";
@@ -29,6 +29,7 @@ import clients from "./assets/clientList";
 import { Switch, Route, Redirect, Link } from "react-router-dom";
 
 function App(props) {
+  let instance = this;
   const [currentScreen, setCurrentScreen] = useState(0);
 
   const useStyles = makeStyles(theme => ({
@@ -54,6 +55,9 @@ function App(props) {
   const { setCurrentUser } = props;
 
   const [open, setOpen] = React.useState(false);
+
+  const [, updateState] = React.useState();
+  const forceUpdate = useCallback(() => updateState({}), []);
 
   const handleOpen = () => {
     setOpen(true);
@@ -134,6 +138,11 @@ function App(props) {
         />
         <Route
           exact
+          path="/logout"
+          render={() => <Redirect to="/signup"></Redirect>}
+        ></Route>
+        <Route
+          exact
           path="/profile"
           render={() =>
             props.currentUser ? (
@@ -160,7 +169,7 @@ function App(props) {
           path="/schedule"
           render={() =>
             props.currentUser ? (
-              <UserCalendar currentUser={this.props.currentUser} />
+              <UserCalendar currentUser={props.currentUser} />
             ) : (
               <Redirect to="/" />
             )

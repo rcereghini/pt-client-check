@@ -19,14 +19,10 @@ const Header = props => {
     setAnchorEl(null);
   };
 
-  const signOutAndClose = () => {
+  const signOutAndClose = props => {
     auth.signOut();
     handleClose();
-  };
-
-  const navigateHandler = navNum => {
-    // props.navChangeCallback(navNum);
-    handleClose();
+    props.navChangeCallback(1337);
   };
 
   return (
@@ -51,7 +47,9 @@ const Header = props => {
         <Link to="/settings">
           <MenuItem onClick={handleClose}>Settings</MenuItem>
         </Link>
-        <MenuItem onClick={signOutAndClose}>Logout</MenuItem>
+        <Link to="/logout">
+          <MenuItem onClick={() => signOutAndClose(props)}>Logout</MenuItem>
+        </Link>
       </Menu>
     </div>
   );
