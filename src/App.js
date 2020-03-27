@@ -24,7 +24,7 @@ import {
 import { setCurrentUser } from "./redux/user/user.actions";
 import { connect } from "react-redux";
 
-import clients from "./assets/clientList";
+// import clients from "./assets/clientList";
 
 import { Switch, Route, Redirect, Link } from "react-router-dom";
 
@@ -55,6 +55,7 @@ function App(props) {
   const { setCurrentUser } = props;
 
   const [open, setOpen] = React.useState(false);
+  const [clients, setClients] = React.useState([]);
 
   const [, updateState] = React.useState();
   const forceUpdate = useCallback(() => updateState({}), []);
@@ -90,14 +91,19 @@ function App(props) {
 
     // setCurrentUser(userAuth);
   });
-  let users = [];
 
   useEffect(() => {
-    firestore.collection("users").onSnapshot(function(querySnapshot) {
-      querySnapshot.forEach(function(doc) {
-        users.push(doc.data());
-      });
-    });
+    let users = [];
+    firestore
+      .collection("users")
+      .get()
+      .then(function(querySnapshot) {
+        querySnapshot.forEach(function(doc) {
+          users.push(doc.data());
+        });
+        setClients(users);
+      })
+      .catch(error => console.log("error =>", error));
   });
 
   return (
@@ -125,6 +131,7 @@ function App(props) {
             navChangeCallback={i => {
               setCurrentScreen(i);
             }}
+            logoutHandler={() => setCurrentUser()}
           ></Header>
         </div>
       ) : null}
@@ -136,11 +143,7 @@ function App(props) {
           path="/signup"
           render={() => (props.currentUser ? <Redirect to="/" /> : <SignUp />)}
         />
-        <Route
-          exact
-          path="/logout"
-          render={() => <Redirect to="/signup"></Redirect>}
-        ></Route>
+
         <Route
           exact
           path="/profile"

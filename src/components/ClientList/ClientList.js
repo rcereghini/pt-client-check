@@ -21,7 +21,7 @@ const ClientList = props => {
           <ClientCard
             client={client}
             key={i}
-            avatar={clientImages[i]}
+            avatar={client.avatarUrl}
           ></ClientCard>
         );
       })}

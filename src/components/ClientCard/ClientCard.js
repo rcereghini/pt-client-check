@@ -67,7 +67,7 @@ const ClientCard = props => {
         onClick={handleOpen}
       >
         <img className="avatar" src={props.avatar}></img>
-        <p>{props.client.name}</p>
+        <p>{props.client.firstName + " " + props.client.lastName}</p>
         {/* <p>
           <a href={`tel:${props.client.phone}`}>{props.client.phone}</a>
         </p>
